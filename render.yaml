@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: legal-rag-api
+    runtime: python
+    plan: free  # Use 'starter' if free tier limits (e.g., spin-down) are an issue
+    rootDir: backend  # Set to backend/ where main.py is located
+    buildCommand: pip install -r ../requirements.txt  # Adjust if requirements.txt is in backend/
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: VOYAGE_API_KEY
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_ENVIRONMENT
+        sync: false
+      - key: PINECONE_INDEX_NAME
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: TOGETHER_API_KEY
+        sync: false
