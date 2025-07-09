@@ -6,7 +6,6 @@ pydantic-settings
 requests
 pinecone
 voyageai
-google-generativeai
 sentence-transformers
 langchain
 python-multipart
@@ -29,4 +28,3 @@ groq
 openai
 anthropic
 supabase
-slowapi
