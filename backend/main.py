@@ -94,13 +94,13 @@ async def process_query(request: QueryRequest):
         logger.error(f"Unexpected error processing query: {e}")
         raise HTTPException(status_code=500, detail="error")
 
+# ... [keep all your existing imports and setup code] ...
+
 if __name__ == "__main__":
     """Run the FastAPI server locally for development."""
-    port = int(os.environ.get("PORT", 8000))  # Use Render's PORT or default to 8000
     uvicorn.run(
-        "backend.main:app",  # Changed to string format for better compatibility
-        host="0.0.0.0",      # Changed from localhost to 0.0.0.0 for production
-        port=port,
-        reload=False,        # Disabled reload in production
-        workers=1
+        "backend.main:app",
+        host="0.0.0.0",
+        port=8000,  # Default local port
+        reload=True  # Enable auto-reload only for local development
     )
