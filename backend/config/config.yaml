@@ -1,0 +1,29 @@
+embedding_models:
+  embedding_model_name: "voyage-law-2"
+vector_store:
+  index_name: "legal-case-search-dense"
+  region: "us-east-1"
+  cloud: "aws"
+retrieval:
+  top_k_candidates: 5
+reranker:
+  model_name: "BAAI/bge-reranker-base"
+  top_n: 5
+generation:
+  max_tokens: 1024
+  providers:
+    - model_name: "llama-3.3-70b-versatile"
+      provider: "groq"
+      priority: 1
+    - model_name: "deepseek-ai/DeepSeek-V3"
+      provider: "together"
+      priority: 2
+    - model_name: "gpt-4o"
+      provider: "openai"
+      priority: 3
+    - model_name: "claude-3-opus-20240229"
+      provider: "anthropic"
+      priority: 4
+response:
+  max_citations: 3
+  cot_template_path: "backend/src/prompt_template/cot_prompt_template.py"
