@@ -4,13 +4,17 @@ from pydantic import BaseModel
 from contextlib import asynccontextmanager
 import time
 import uvicorn
+import os  # Added for PORT environment variable
 from backend.src.utils.logger import logger
 from backend.src.utils.exception import LegalRAGException
 from backend.src.config_settings.config_manager import ConfigurationManager
 from backend.src.pipeline.rag_pipeline import LegalRAGPipeline
 
 # Configuration settings
-origins = ["https://legal-case-research-app.vercel.app/"]  # Update to ["https://your-vercel-app.vercel.app"] in production
+origins = [
+    "https://legal-case-research-app.vercel.app",
+    "http://localhost:3000"  # For local development
+]
 
 # Lifespan handler for startup/shutdown
 @asynccontextmanager
@@ -41,7 +45,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # Request model
 class QueryRequest(BaseModel):
     query: str
@@ -93,10 +96,11 @@ async def process_query(request: QueryRequest):
 
 if __name__ == "__main__":
     """Run the FastAPI server locally for development."""
+    port = int(os.environ.get("PORT", 8000))  # Use Render's PORT or default to 8000
     uvicorn.run(
-        app,
-        host="localhost",
-        port=8000,
-        reload=True,
+        "backend.main:app",  # Changed to string format for better compatibility
+        host="0.0.0.0",      # Changed from localhost to 0.0.0.0 for production
+        port=port,
+        reload=False,        # Disabled reload in production
         workers=1
     )
