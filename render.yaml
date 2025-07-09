@@ -4,12 +4,19 @@ services:
     runtime: python
     plan: free
     rootDir: backend
+<<<<<<< Updated upstream
     buildCommand: chmod +x .render-build.sh && ./.render-build.sh
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1
+=======
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+>>>>>>> Stashed changes
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
+      - key: RENDER_HEALTH_CHECK_TIMEOUT_SECONDS
+        value: "120"
       - key: PORT
         value: 10000  # Default port if $PORT not set (Render will override this)
       - key: VOYAGE_API_KEY
