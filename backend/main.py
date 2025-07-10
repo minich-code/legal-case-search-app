@@ -118,7 +118,13 @@ from backend.src.config_settings.config_manager import ConfigurationManager
 from backend.src.pipeline.rag_pipeline import LegalRAGPipeline
 
 # Configuration settings
-origins = ["*"]  # Update to ["https://your-vercel-app.vercel.app"] in production
+origins = [
+    "https://48e5a33010f5.ngrok-free.app",
+    "https://legal-case-research-app.vercel.app"
+
+
+
+]  # Update to ["https://your-vercel-app.vercel.app"] in production
 
 # Lifespan handler for startup/shutdown
 @asynccontextmanager
