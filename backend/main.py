@@ -119,7 +119,7 @@ from backend.src.pipeline.rag_pipeline import LegalRAGPipeline
 
 # Configuration settings
 origins = [
-    "https://48e5a33010f5.ngrok-free.app",
+    "https://56b28a950fca.ngrok-free.app",
     "https://legal-case-research-app.vercel.app",
     "*"
 
