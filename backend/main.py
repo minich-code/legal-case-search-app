@@ -12,8 +12,9 @@ from backend.src.pipeline.rag_pipeline import LegalRAGPipeline
 
 # Configuration settings
 origins = [
-    "https://legal-case-research-app.vercel.app",
-    "http://localhost:3000"  # For local development
+    "https://legal-case-search-app-abc123.vercel.app",  # Replace with your actual Vercel URL
+    "http://localhost:3000",  # For local development
+    "*"  # Temporary for ngrok; remove for production
 ]
 
 # Lifespan handler for startup/shutdown
@@ -45,6 +46,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 # Request model
 class QueryRequest(BaseModel):
     query: str
@@ -94,12 +96,10 @@ async def process_query(request: QueryRequest):
         logger.error(f"Unexpected error processing query: {e}")
         raise HTTPException(status_code=500, detail="error")
 
-# ... [keep all your existing imports and setup code] ...
-
 if __name__ == "__main__":
     """Run the FastAPI server locally for development."""
     uvicorn.run(
-        "backend.main:app",
+        "main:app",
         host="0.0.0.0",
         port=8000,  # Default local port
         reload=True  # Enable auto-reload only for local development
